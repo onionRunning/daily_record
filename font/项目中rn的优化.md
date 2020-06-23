@@ -239,14 +239,14 @@ ps. 当然还有无用资源删除以及代码混淆...
 ##### 12. 关于组件库 与 原生库
 
 ***组件库: qy-rn-component***
-![地址](https://www.npmjs.com/package/qy-rn-component)
+[地址](https://www.npmjs.com/package/qy-rn-component)
 
 ```
 我觉得这个组件库设计的不好,没有一个base规范,并且api设计过于复杂, 初始设计的时候就过度设计,然后也没有一套自己的ui规范,只想着灵活性,忽略掉了很多东西。但是有一说一还是比自己从头去写要好一点点。
 ```
 
 ***原生库: react-native-qy-library***
-![地址](https://www.npmjs.com/package/react-native-qy-library)
+[地址](https://www.npmjs.com/package/react-native-qy-library)
 
 ```
 信贷app 需要抓取用户的一些隐私信息,用于风控或者用户行为分析, 然后这个原生库就是为了这个目的,并且大体达到双端的行为几乎一致
