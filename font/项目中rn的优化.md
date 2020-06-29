@@ -1,17 +1,17 @@
-### 本文讲解关于rn 的一些优化或使用经验
+## 本文讲解关于rn 的一些优化或使用经验
 
-#### 调试工具
+### 调试工具
 
 > 用过哪些工具
 
-##### 1. debugger-ui or element inspector
+#### 1. debugger-ui or element inspector
 
 ```
 debugger-ui 直接打印显示比较简单
 element inspector: 虚拟机 or 真机可以看一些信息,eg: 帧率...
 ```
 
-##### 2. react-devtools
+#### 2. react-devtools
 
 ```
 1. 安装: npm install -g react-devtools (安装过程比较慢)
@@ -21,7 +21,7 @@ element inspector: 虚拟机 or 真机可以看一些信息,eg: 帧率...
 4. 一般用做样式调整
 ```
 
-##### 3. Reactotron
+#### 3. Reactotron
 
 ```
 下载Reactotron客户端地址: 
@@ -49,7 +49,7 @@ ps. 如果你遇到未connect How to connect to Reactotron from Android Phone?
 
 ```
 
-#####  4. react-native-debugger
+####  4. react-native-debugger
 
 ---
 
@@ -86,7 +86,7 @@ ps. 如果你遇到未connect How to connect to Reactotron from Android Phone?
 
 ---
 
-##### 1. 接口优化,上下行流量优化
+#### 1. 接口优化,上下行流量优化
 
 > 减少非必要接口的重复请求(带宽,与用户体验),对于相应字段可以有需要返回
 
@@ -113,7 +113,7 @@ ps. 如果你遇到未connect How to connect to Reactotron from Android Phone?
 
 ---
 
-##### 2. 启动页优化
+#### 2. 启动页优化
 
 > 点击logo图标,首页启动的时长需要减少
 
@@ -137,7 +137,7 @@ jsbundle 足够大才需要进行分包处理，之前没搞过这个...
 
 ---
 
-##### 3. 体积优化
+#### 3. 体积优化
 
 > 减少app包的体积: 资源大小优化
 
@@ -164,7 +164,7 @@ ps. 当然还有无用资源删除以及代码混淆...
 
 ---
 
-##### 4. 针对无网，弱网 给用户友好提示(弹窗提示 or 展示相应的状态)
+#### 4. 针对无网，弱网 给用户友好提示(弹窗提示 or 展示相应的状态)
 
 ```
 1. 接口在调用的时候会check网络状态 给出相应的提示(eg: 请检查当前网络状态)
@@ -174,7 +174,7 @@ ps. 当然还有无用资源删除以及代码混淆...
 
 ---
 
-##### 5. 本地缓存
+#### 5. 本地缓存
 
 > 内置本地sql,对一些特殊接口内容进行缓存处理: 减少请求提升效率, 无网弱网状态下(还是有些内容可见)
 
@@ -185,7 +185,7 @@ ps. 当然还有无用资源删除以及代码混淆...
 
 ---
 
-##### 6. 流畅度
+#### 6. 流畅度
 
 > 体验方面是否出现掉帧卡顿,这个需要通过工具查看帧率的范围,确定是代码层面还是哪里出现的问题(fix)
 
@@ -195,7 +195,7 @@ ps. 当然还有无用资源删除以及代码混淆...
 
 ---
 
-##### 7. 单元测试 or 自动化测试 
+#### 7. 单元测试 or 自动化测试 
 
 ***单元测试***
 
@@ -214,7 +214,7 @@ appium / detox 跑流程(ui + 接口流程)
 
 ---
 
-##### 8. 安全问题
+#### 8. 安全问题
 
 ```
 - 代码混淆
@@ -224,7 +224,7 @@ appium / detox 跑流程(ui + 接口流程)
 ```
 ---
 
-##### 9. CI/CD
+#### 9. CI/CD
 
 ```
 CI: 持续集成, 跑代码check 跑单元测试 跑自动化测试 跑build
@@ -233,7 +233,7 @@ CD: 持续部署, 自动部署上线 or 自动发包
 
 ---
 
-##### 10. HotUpdateHotFixUnity（热更新）
+#### 10. HotUpdateHotFixUnity（热更新）
 
 ``` 
 android 端集成开源的: code-push-cli 本地部署比较麻烦,diff包比较大 下载过程如果网速较慢: 12s左右能下载3M左右的安装包, 快的话: 4-5s 1M 
@@ -245,7 +245,7 @@ android 端集成开源的: code-push-cli 本地部署比较麻烦,diff包比较
 
 ---
 
-##### 11. 关于loading or hint 体验优化
+#### 11. 关于loading or hint 体验优化
 
 1. loading 跳动
 
@@ -265,7 +265,7 @@ android 端集成开源的: code-push-cli 本地部署比较麻烦,diff包比较
 
 ---
 
-##### 12. 关于组件库 与 原生库
+#### 12. 关于组件库 与 原生库
 
 ***组件库: qy-rn-component***
 [地址](https://www.npmjs.com/package/qy-rn-component)
@@ -283,7 +283,7 @@ android 端集成开源的: code-push-cli 本地部署比较麻烦,diff包比较
 
 ---
 
-##### 13. 多环境 + 多渠道 + 多平台打包 + 多行为
+#### 13. 多环境 + 多渠道 + 多平台打包 + 多行为
 
 ```
 4个环境(dev/test/preprod/prod) * (2-3) 个渠道(马甲包) * 2个平台(android/ios) + 2行为· 打包/启动 (dev/pkg) ios没有集成打包 
@@ -293,7 +293,7 @@ android 端集成开源的: code-push-cli 本地部署比较麻烦,diff包比较
 后面优化在js代码层面需要区分: 后面就采用shell 去更改一个配置文件(xx.ts) 然后js层都去读取这个配置文件(xx.ts) 打包的时候把所有的变量采用命令行的形式处理
 ```
 
-##### 14 记录几个事故
+#### 14 记录几个事故
 
 ***1. 关于强更新失败***
 
@@ -338,6 +338,6 @@ android 端集成开源的: code-push-cli 本地部署比较麻烦,diff包比较
 
 ---
 
-#### 针对hula-qinzi项目中比较直观的体验问题
+### 针对hula-qinzi项目中比较直观的体验问题
 - 首页/呼啦圈 快速点击，路由会跳转2次
 - 有些模块出现ui 掉帧的情况, 特别明显的就是 一些模块路由切换时触发出现卡顿的情况
