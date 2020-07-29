@@ -1,10 +1,10 @@
-1. react Recoil 
+### react Recoil 
 
 顶层组件:
 
-```
+```ts
 <RecoilRoot>
-
+  <Root />
 </RecoilRoot>
 ```
 
@@ -12,7 +12,7 @@
  
 ```ts
 atom<T>({
-  key: 'string', //  整个程序独一无二的
+  key: 'string', //  命名空间
   default: T | Promise<T> | RecoilValue<T> // 初始值 
 })
 ```
@@ -25,5 +25,6 @@ selector({
   get: ({
     get: GetRecoilValue
   }) => T | Promise<T> | RecoilValue<T>,  // 计算得到值的
+  set: () => {}
 })
 ```

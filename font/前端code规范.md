@@ -40,6 +40,29 @@ const currentBoolean = true
 
 - 常量声明
 
+> 针对与常量的申明: 就用 UPPER_CASE 这种形式: AAA_BBB / AAA
+
+```ts
+// good
+const NAV = ['test1', 'test2']
+
+// bad
+const Nav = 'update/getCurrentPages'
+
+// good
+enum NAV_TITLE {
+  all = '文章列表',
+  draft = '草稿',
+}
+
+// bad
+enum NavTitle {
+  all = '文章列表',
+  draft = '草稿',
+}
+
+```
+
 - 变量声明
 
 > ***2.2 函数声明***
@@ -63,7 +86,7 @@ const currentBoolean = true
 
 #### 4. typescript
 
-- 申明类型: any 一般情况下我们写的业务代码是需要具体到类型的，当然如果是特别通用的申明是可以用泛型
+- 申明类型: any 减少使用 一般情况下我们写的业务代码是需要具体到类型的，当然如果是特别通用的申明是可以用泛型
 
 
 #### 5. 单元测试
@@ -134,6 +157,12 @@ const [value, setValue] = useState('')
 
 ```
 需要严格按照上面的介绍情况处理
+```
+
+7. styleComponents
+
+```js
+- 申明首字母要是s
 ```
 
 #### git工作流
