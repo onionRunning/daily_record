@@ -12,7 +12,7 @@
 - assets 静态资源
 - pages  页面组件
 - components 公共组件 : base(基础组件)/bussiness(业务组件)
-- global 公用配置文件夹
+- global 公用配置文件夹 : config, utils, ...
 - native 原生模块(android/ios)
 - server 请求数据
 - stores 状态机
@@ -77,7 +77,7 @@ const xiazai_quan = 'xxxx'
 
 ```
 
-***如果要用到下列变量: ID URL Android IOS ***
+***如果要用到下列变量按照这个格式就行: ID URL Android IOS ***
 
 > ***2.2 函数声明***
 
@@ -142,7 +142,7 @@ const Item = () => { return </> }
 #### 3. eslint 规则
 
 - 具体规则去参照: eslint-config-5e 规则集合, 目前包括: base/react 2大类
-[gitlab地址](git@git.dev.moumoux.com:base/eslint-config-5e.git)
+***[gitlab地址](git@git.dev.moumoux.com:base/eslint-config-5e.git)***
 
 
 > 主要是针对 ts/tsx 语法进行了一些约束,针对这些规则,会不断完善 或者大家觉得需要优化的规则可以提出来进行讨论修改
@@ -167,7 +167,7 @@ const Item = () => { return </> }
 
 > 这个是我这几个月记录的一些 merge过程中,被提出的一些问题
 
-1. 如果code 的pr 是解决了哪些issue, 在comment中需要带上 issue编号
+1. 如果code 的pr 是解决了哪些issue, 在comment中需要带上: close issue编号, 合并后就自动关闭这个请求
 
 2. 项目中特殊的操作可以记录留痕: Readme.md, FIX. TODO 记录一下
 
@@ -180,19 +180,20 @@ const Item = () => { return </> }
 3. 对于react中组件中的合成方法:
 
 ```js
-// bad
+// A
 <A onFocus={() => setFlag(flase)} onBlur={() => setFlag(true)} />
 
-// good
+// B
 <A onFocus={changeFlagStatus(false)} onBlur={changeFlagStatus(true)} />
 
-对于这个默认在 个人人为 合成事件中的方法: 优先在 组件内部去书写方法.
+- 如果只是单行逻辑的话，可用自定义hook 或 上述的A种方式
+- 多行逻辑的话建议把函数丢除去
 
-1. 首先你的函数不确定只有这一个逻辑, 提到外面是有助于拓展的(如果有额外的逻辑)
-2. return 是写dom的地方,没必要写额外的js吧
+return 是写dom的地方,如果写过多的js逻辑,感觉有些干扰
+
 ```
 
-4. 关于useEffect 如果你进行封装的话,那么依赖的参数就用deps
+4. 关于useEffect 如果你进行封装的话,那么依赖的参数名用deps
 
 ```js
 
@@ -213,6 +214,7 @@ const useXX<T> = (fn: () => void, params= T[] ) => {
         ...
     }, [params])
 }
+
 ```
 
 5. 关于hook: useState 比较简单可以省略掉声明
@@ -223,6 +225,7 @@ const [value, setValue] = useState<string>('')
 
 // good
 const [value, setValue] = useState('')
+
 ```
 
 6. 关于命名:
@@ -242,10 +245,8 @@ const [value, setValue] = useState('')
 
 #### 提几点后端小优化
 
-- 请求参数是否可以统一: aAA / a_b / a-b  就默认一种就行 
+- 请求参数是否可以统一: aAA / a_b / a-b   就默认一种就行 
 - 关于http状态码是否可以统一, 参数报错时能否返回 400 系列, 403 鉴权 , 系统错误 500, 404 就单指路由未匹配, 成功 200系列
-- 关于分页， 希望可以返回total, fix 一些前端无法fix的bug
-
 
 ---
 
