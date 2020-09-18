@@ -75,6 +75,8 @@ enum NavTitle {
 // bad
 const xiazai_quan = 'xxxx'
 
+// good
+const downloadCircleContent = {}
 ```
 
 ***如果要用到下列变量按照这个格式就行: ID URL Android IOS ***
@@ -146,6 +148,8 @@ const Item = () => { return </> }
 
 
 > 主要是针对 ts/tsx 语法进行了一些约束,针对这些规则,会不断完善 或者大家觉得需要优化的规则可以提出来进行讨论修改
+
+- rn 项目中如果遇到有些格式上的冲突，可以先从代码层面进行部分调整,然后在考虑规则的问题
 
 
 ---
@@ -242,7 +246,72 @@ const [value, setValue] = useState('')
 
 ---
 
-#### 关于前端项目简介
+#### 可以非必要强制遵守
+
+##### 1. 使用可搜索的名称
+
+我们要阅读的代码比要写的代码多得多， 所以我们写出的代码的可读性和可搜索性是很重要的。 使用没有
+意义的变量名将会导致我们的程序难于理解， 将会伤害我们的读者， 所以请使用可搜索的变量名。
+
+bad
+
+```javascript
+// 艹， 86400000 是什么鬼？
+setTimeout(blastOff, 86400000)
+
+```
+
+good
+
+```javascript
+// 将它们声明为全局常量 `const` 。
+const MILLISECONDS_IN_A_DAY = 86400000
+
+setTimeout(blastOff, MILLISECONDS_IN_A_DAY)
+
+```
+
+##### 2. 使用解释性的变量
+
+bad
+
+```javascript
+const address = 'One Infinite Loop, Cupertino 95014'
+const cityZipCodeRegex = /^[^,\\]+[,\\\s]+(.+?)\s*(\d{5})?$/
+saveCityZipCode(address.match(cityZipCodeRegex)[1], address.match(cityZipCodeRegex)[2])
+```
+
+good
+
+```javascript
+const address = 'One Infinite Loop, Cupertino 95014'
+const cityZipCodeRegex = /^[^,\\]+[,\\\s]+(.+?)\s*(\d{5})?$/
+const [, city, zipCode] = address.match(cityZipCodeRegex) || []
+saveCityZipCode(city, zipCode)
+```
+
+##### 3. 函数应当只做一件事情
+
+这是软件工程中最重要的一条规则， 当函数需要做更多的事情时， 它们将会更难进行编写、 测试和推理。
+当你能将一个函数隔离到只有一个动作， 他们将能够被容易的进行重构并且你的代码将会更容易阅读。 如
+果你严格遵守本指南中的这一条， 你将会领先于许多开发者。
+
+
+##### 4. 移除冗余代码
+
+竭尽你的全力去避免冗余代码。 冗余代码是不好的， 因为它意味着当你需要修改一些逻辑时会有多个地方
+需要修改。
+
+你有冗余代码通常是因为你有两个或多个稍微不同的东西， 它们共享大部分， 但是它们的不同之处迫使你使
+用两个或更多独立的函数来处理大部分相同的东西。 移除冗余代码意味着创建一个可以处理这些不同之处的
+抽象的函数/模块/类。
+
+让这个抽象正确是关键的， 这是为什么要你遵循 *Classes* 那一章的 SOLID 的原因。 不好的抽象比冗
+余代码更差， 所以要谨慎行事。 既然已经这么说了， 如果你能够做出一个好的抽象， 才去做。 不要重复
+你自己， 否则你会发现当你要修改一个东西时时刻需要修改多个地方。
+
+
+---
 
 参考文章:
 1. [腾讯团队编码规范](http://alloyteam.github.io/CodeGuide/)
