@@ -13,24 +13,22 @@ tips:
 1. initialState: 可以为默认值, 也可以返回默认值的函数, useState('test') or useState(() => 'test')
 2. 如果内部需要的状态比较多，可以直接设置对象集合代替单个属性
 
-// bad
+// way1
 const [isLoading, setLoading] = useState(false)
 const [isShowModal, setShowModal] = useState(false)
 const [currentPage, setCurrentPage] = useState(1)
 const [list, setList] = useState([])
 ...
 
-// good
+// way2
 const [goodStatusParams, setGoodStatusParams] = useState({
     isLoading: false,
     isShowModal: false,
     currentPage: 1,
     list: []
 })
-
-// 当然不是什么操作都需要这么处理, 
-// 如果你的组件内部逻辑比较简单，推荐前者直观, 后者只是一定程度上减少了 setState 的个数
-// 后者可以整合某一类的参数聚合, 新加状态属性时， 只用添加字段 而不是一直堆useState
+// 官方介绍: 我们推荐把 state 切分成多个 state 变量，每个变量包含的不同值会在同时发生变化。
+// 俩种方式我觉得都可以,
 
 
 const [num, setNum] = (0)
@@ -60,13 +58,14 @@ const onclick1 = () => {
 // output
 console(num)
 
+> 多个setXx 执行后,render的打印情况（当然我们编码时不会写这样的代码，这样只是说明你是不是比较了解这个底层机制）
+
 // 记录一下, 后续源码分析的时候用上.
 ```
 
-
 #### useEffect
 
-> 生命周期替代者
+> class组件中生命周期职责类似
 
 ```js
 function useEffect(effect: EffectCallback, deps?: DependencyList): void
@@ -93,39 +92,117 @@ useEffect(() => {
   return () => {
     window.removeEventListener('resize', changeResize)
   }
-})
-
+}, [changeResize])
 
 tips:
 1. eslint-plugin-react-hooks 会默认给 hook 的依赖加上参数， 可能会导致程序出现bug, 最好关闭该条规则或设置为 warn状态
+2. 一般用于: 请求数据, 添加监听逻辑(移除监听), 更新数据 ...
 
-// 点击加号后， resize 打印count 是啥
-const App = () => {
-  const [count, setCount] = useState(0)
-  useEffect(() => {
-     window.addEventListener('resize', handleResize)
-     return () => window.removeEventListener('resize', handleResize)
-  }, [])
-  const handleResize = () => {
-    console.log(`count is ${count}`)
-  }
-  return (
-    <div className="App">
-      <button onClick={() => setCount(count + 1)}> + </button>
-      <h1>{count}</h1>
-    </div>
-  );
-}
 
-2. 多个useEffect 执行, 如果没有依赖变化时，只会重新render一遍？
-
-// useEffect 机制？
 ```
-
 
 ---
 
+#### useRef
+
+> 返回一个可变ref对象 function component 唯一引用, 并且自身发生改变是不会触发重新渲染
+
+```js
+function useRef<T>(initialValue: T): MutableRefObject<T>;
+interface MutableRefObject<T> {
+  current: T;
+}
+
+initialValue 默认值可以用 .current 进行访问
+
+const scrollViewRef = useRef() -> scrollViewRef.current 进行使用
+
+- 跳过首次执行
+const useVaildExecute = (fn: () => (void | () => void), deps = []) => {
+  const firstRun = useRef(false)
+  useEffect(() => {
+    if (firstRun.current) {
+      firstRun.current = true
+      return
+    }
+    fn()
+  }, [...deps])
+}
+
+
+-  利用 useImperativeHandle , 父组件执行子组件的方法
+
+const Child = (props) => {
+  const gettest = () => 'test'
+  useImperativeHandle(props.cRef, () => ({
+    test: gettest,
+  }))
+  useEffect(() => {
+    props.transCb(gettest)
+  })
+  return <View />
+}
+const Parent = () => {
+  const parentRef = useRef({})
+  const childRef = useRef({})
+  const pressOK = () => {
+    console.log(childRef.current.test(), 'useImperativeHandle')
+    console.log(parentRef.current.test(), 'transCb')
+  }
+  const transCb = (cb) => {
+    parentRef.current = {test: cb}
+  }
+  return (
+    <TouchableOpacity onPress={pressOK}>
+      <Text>dianwo</Text>
+      <Child cRef={childRef} transCb={transCb} />
+    </TouchableOpacity>
+  )
+}
+
+tips:
+1. 获取组件实例对象: 某些组件有提供ref api, 绑定后可以直接使用相应的api, 也可以利用 回调的方式或 useImperativeHandle 给父组件设置子组件的方法
+2. 可用跨渲染变量: 来设置自己的逻辑, 并且ref发生改变时不会触发渲染， 临时变量, 定时器或延时器变量...
+```
+
+---
+
+#### useCallback or useMemo
+
+关于这2个hook 其实是较少使用的, 用的话是为了做性能优化 
+
+```js
+
+useCallback: 缓存函数, 避免额外开销渲染
+useCallback(fn, deps)
+
+function useCallback<T extends (...args: any[]) => any>(callback: T, deps: DependencyList): T;
+
+
+useMemo: 缓存变量, 避免额外开销渲染
+useMemo(() => fn, deps)
+
+function useMemo<T>(factory: () => T, deps: DependencyList | undefined): T;
+
+```
+
+---
+
+#### useContext
+
+---
+
+
+#### useLayoutEffect
+
+---
+
+
+
+
 ### 自定义hook
+
+
 
 ---
 
@@ -134,3 +211,5 @@ const App = () => {
 ---
 
 ### 参考文章
+
+1. [react-hook 官方website](https://react.docschina.org/docs/hooks-reference.html)
