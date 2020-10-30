@@ -1,6 +1,6 @@
 ## react-hook
 
-### 常用api hook 以及用法
+### 常用api hook 以及通常用法
 
 #### useState
 
@@ -169,7 +169,7 @@ tips:
 
 #### useCallback or useMemo
 
-关于这2个hook 其实是较少使用的, 用的话是为了做性能优化 
+关于这2个hook 其实是较少使用的, 用的话是为了做性能优化但是
 
 ```js
 
@@ -186,30 +186,167 @@ function useMemo<T>(factory: () => T, deps: DependencyList | undefined): T;
 
 ```
 
+个人理解: 
+
+1. 频繁触发render,造成了性能瓶颈可以去缓存hook去优化组件
+2. ***但是为了性能优化是有代价的, 不能什么场景下都去用这2个hook, 一般出现性能瓶颈后再去用这2个hook去优化会比较好***
+
+
 ---
 
 #### useContext
+
+- 上下文,跨组件传递数据
+
+```js
+function useContext<T>(context: Context<T>/*, (not public API) observedBits?: number|boolean */): T;
+type Provider<T> = ProviderExoticComponent<ProviderProps<T>>;
+type Consumer<T> = ExoticComponent<ConsumerProps<T>>;
+
+interface Context<T> {
+    Provider: Provider<T>;
+    Consumer: Consumer<T>;
+    displayName?: string;
+}
+
+type Cb = (_s: string) => void
+const GlobalContext = React.createContext({
+  name: 'ojbk',
+  dispatch: ((_s: string) => void 0) as Cb,
+})
+const Grandfather = () => {
+  const [name, setName] = useState('name1')
+  return (
+    <GlobalContext.Provider value={{name, dispatch: (s: string) => setName(s)}}>
+      <Father />
+    </GlobalContext.Provider>
+  )
+}
+const Father = () => <Child />
+const Child = () => {
+  const globalContext = useContext(GlobalContext)
+  return (
+    <View>
+      <Text onPress={() => globalContext.dispatch('okkk')} style={{padding: 40}}>
+        {globalContext.name}
+      </Text>
+    </View>
+  )
+}
+
+然后就可以实现一个类似的redux 的状态管理(当然上面的dispatch 本质上就是回调函数), 你也可以把useState 换成 useReducer更加贴合redux的使用场景
+我们可以发现数据流的更新是要通过子组件进行触发, 父组件执行相应的hook update value 然后在使子组件的数据更新
+
+tip:
+1. 组件层级过深我们不想用 props 一层一层进行传递 可以用这个替代跨组件属性传递
+2. 官方说明: 调用了 useContext 的组件总会在 context值变化时重新渲染 (只要 Context.Provider 的value值发生改变时,使用该hook useContext(Context) 的组件就会重新触发render)
+3. 由于自身变化会导致引用了的子组件中会重复渲染, 所以搭配的时候谨慎使用
+
+到这里我提一句: redux or mobx 他们在使用的时候会有个 连接库: react-redux or mobx-react 当数据流更新时 触发重新渲染操作是在这里面触发的, 我们上面的 setName 也是这个触发重新更新的操作
+```
 
 ---
 
 
 #### useLayoutEffect
 
+- 功能与 useEffect 类似,参数也一样
+
+```js
+function useLayoutEffect(effect: EffectCallback, deps?: DependencyList): void;
+
+// eg: 渲染app头部 同步去update
+export const useReWriteHeader = (props: RewriteProps, deps: any = []) => {
+  const navigation = useNavigation()
+  useLayoutEffect(() => {
+    const options: RewriteProps = {}
+    if (props.headerTitle) {
+      options.headerTitle = props.headerTitle
+    }
+    if (props.headerRight) {
+      options.headerRight = () => props.headerRight!()
+    }
+    if (props.headerLeft) {
+      options.headerLeft = () => props.headerLeft!()
+    }
+    if (props.header === null) {
+      options.header = null
+    }
+    navigation.setOptions(options)
+  }, [navigation, ...deps])
+}
+
+tips:
+1. 执行时机: useLayoutEffect 是比 useEffect 先执行, useLayoutEffect是触发渲染同步执行, 而useEffect是渲染完成后才执行
+2. 官方说明: useEffect以避免阻塞视觉更新， 如果是更新dom等操作优先 useLayoutEffect , request数据等操作的话就用useEffect
+
+```
 ---
 
+#### useReducer
 
+```js
+function useReducer<R extends ReducerWithoutAction<any>>(
+    reducer: R,
+    initializerArg: ReducerStateWithoutAction<R>,
+    initializer?: undefined
+): [ReducerStateWithoutAction<R>, DispatchWithoutAction];
 
+type ReducerWithoutAction<S> = (prevState: S) => S;
+
+const loginReducer = (state: any, action: any) => {
+  switch (action.type) {
+    case 'login_success':
+      return {...state, status: 'success'}
+    case 'login_out':
+      return {...state, status: 'logout'}
+    default:
+      return {...state, status: 'init'}
+  }
+}
+
+const App = () => {
+  const [loginRes, dispatch] = useReducer(loginReducer, {status: 'ooo'})
+  return <Text style={{padding: 40}} onPress={() => dispatch({type: 'login_successa'})}>当前状态是{loginRes.status}</Text>
+}
+
+当状态比较复杂时可用 useReducer 来代替 useState
+
+```
+
+---
 
 ### 自定义hook
 
+1. 5e-hooks 常用的自定义hook
 
+```
+useMount
+useResetAction
+useDebounce
+useThrottle
+useSessionStorage
+useLocalStorage
+useOnresize
+useReWriteHeader
+useFocus
+
+当然自定义hook的意义就是去抽离一些公用的逻辑
+1. useXx use打头
+2. 顶层调用
+```
 
 ---
 
 ### 源码详解
+
+```
+后续的篇章会介绍深入的源码
+```
 
 ---
 
 ### 参考文章
 
 1. [react-hook 官方website](https://react.docschina.org/docs/hooks-reference.html)
+2. [用 useContext + useReducer 替代 redux](https://juejin.im/post/6844903854807482382#heading-9)

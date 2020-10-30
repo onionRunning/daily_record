@@ -114,13 +114,13 @@ const styles = StyleSheet.create({
 font-size -> fontSize
 padding-bottom -> paddingBottom
 
-ps. 当然还有 position: absolute, 这个定位是相对于你的父元素而言 等细节.
+ps. 当然还有 position: relative, 这个定位是相对于你的兄弟元素而言 等细节.
 
 ```
 
 problem: ui 编写的时候尽量不要用定宽高的方式?
 
-> 不同的机型尺寸可能不太一致， eg: width: 375 - 16 * 2, 可用 flex: 1, padding 左右各16 替代
+> 不同的机型尺寸可能不太一致， eg: width: 375 - 16 * 2, 可用 flex: 1, padding 左右各16 替代, 当然也可以重新计算尺寸 用 375 这个尺寸为base
 
 
 ---
