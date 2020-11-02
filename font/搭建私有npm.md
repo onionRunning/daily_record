@@ -1,0 +1,38 @@
+#### 搭建
+
+巴拉巴拉, 官网上就有
+
+#### 设置权限
+
+```
+1. 登录用户才可以发包
+```
+
+#### 用法
+
+1. way one
+```
+yarn add 5e-hooks --registry http://dev.moumoux.com:9088
+```
+
+2. way two
+
+``` 
+直接用nrm来管理你npm源, 手动切换 
+nrm add xx http://dev.moumoux.com:9088/
+nrm ls
+nrm use xx
+```
+
+#### 撤销发的包
+
+```
+1. npm unpublish packagename --force --registry http://dev.moumoux.com:9088 (仓库地址)
+```
+
+ps. 24小时内才能撤销
+
+参考文章:
+1. [github](https://github.com/verdaccio/verdaccio)
+2. [npm 撤销发布包](https://www.cnblogs.com/penghuwan/p/6973702.html#_label0)
+3. [nrm 管理npm源](https://www.cnblogs.com/Jimc/p/10280774.html)
