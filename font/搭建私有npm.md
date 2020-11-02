@@ -8,9 +8,17 @@
 1. 登录用户才可以发包
 ```
 
+#### 注册用户
+
+```
+npm adduser --registry http://dev.moumoux.com:9088
+
+```
+
 #### 用法
 
 1. way one
+
 ```
 yarn add 5e-hooks --registry http://dev.moumoux.com:9088
 ```
@@ -22,7 +30,11 @@ yarn add 5e-hooks --registry http://dev.moumoux.com:9088
 nrm add xx http://dev.moumoux.com:9088/
 nrm ls
 nrm use xx
+
+然后直接: yarn add 5e-hooks
 ```
+
+> ps. 私有npm 内部有代理，现在默认指向的是淘宝镜像
 
 #### 撤销发的包
 
