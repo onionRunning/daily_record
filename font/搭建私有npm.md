@@ -1,6 +1,6 @@
 #### 搭建
 
-巴拉巴拉, 官网上就有
+巴拉巴拉, 官网上就有,修改配置 ...
 
 #### 设置权限
 
@@ -14,6 +14,19 @@
 npm adduser --registry http://dev.moumoux.com:9088
 
 ```
+
+#### push
+
+```
+npm login
+
+npm push --registry http://dev.moumoux.com:9088
+
+or 
+切换源直接: npm push
+
+```
+
 
 #### 用法
 
