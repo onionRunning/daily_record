@@ -15,7 +15,7 @@ npm adduser --registry http://dev.moumoux.com:9088
 
 ```
 
-#### push
+#### publish
 
 ```
 npm login
@@ -56,6 +56,17 @@ nrm use xx
 ```
 
 ps. 24小时内才能撤销
+
+#### problem
+
+> 发包不成功
+
+```
+1. 是不是包体积过大
+2. 是不是没登录
+3. 包名...
+```
+
 
 参考文章:
 1. [github](https://github.com/verdaccio/verdaccio)
