@@ -20,7 +20,7 @@ npm adduser --registry http://dev.moumoux.com:9088
 ```
 npm login
 
-npm push --registry http://dev.moumoux.com:9088
+npm publish --registry http://dev.moumoux.com:9088
 
 or 
 切换源直接: npm push
