@@ -18,7 +18,7 @@ npm adduser --registry http://dev.moumoux.com:9088
 #### publish
 
 ```
-npm login
+npm login / npm login --registry http://dev.moumoux.com:9088
 
 npm publish --registry http://dev.moumoux.com:9088
 
@@ -28,7 +28,7 @@ or
 ```
 
 
-#### 用法
+#### 安装用法
 
 1. way one
 
@@ -55,7 +55,7 @@ nrm use xx
 1. npm unpublish packagename --force --registry http://dev.moumoux.com:9088 (仓库地址)
 ```
 
-ps. 24小时内才能撤销
+ps. 24小时内才能撤销(骗你一手)
 
 #### problem
 
@@ -65,7 +65,7 @@ ps. 24小时内才能撤销
 1. 是不是包体积过大
 2. 是不是没登录
 3. 包名...
-```
+``` 
 
 
 参考文章:
