@@ -81,7 +81,6 @@ func insertionSort(arr []int) []int {
 	for a := 1; a < len(arr); a++ {
 		pre := a - 1
 		current := arr[a]
-
 		for ; pre > 0 && current < arr[a]; pre-- {
 			arr[pre+1] = arr[pre]
 		}
