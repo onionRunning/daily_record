@@ -19,3 +19,4 @@
 1. [github](https://github.com/serverless/serverless/blob/master/README_CN.md)
 2. [serverless 官网](https://www.serverless.com/cn/)
 3. [serverless 中文网](https://serverlesscloud.cn/)
+4. [美团Serverless平台Nest的探索与实践](https://tech.meituan.com/2021/04/21/nest-serverless.html)
