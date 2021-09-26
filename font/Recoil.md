@@ -1,4 +1,4 @@
-### react Recoil 
+# react Recoil
 
 顶层组件: 基本上主流的状态机需要写 个顶层root 然后再把值给传进去， 这里可以不用手动传value
 
@@ -8,9 +8,9 @@
 </RecoilRoot>
 ```
 
-#### 基础api
+## 基础api
 
-##### 1.  atom 原子函数
+### 1.  atom 原子函数
  
 ```ts
 atom<T>({
@@ -33,7 +33,7 @@ const Login = () => {
 
 ```
 
-##### 2. selector 选择器函数， atom 的补充, 可以组合多个 atom 得到你的数据
+### 2. selector 选择器函数， atom 的补充, 可以组合多个 atom 得到你的数据
 
 ```ts
 selector<T>({
@@ -63,8 +63,7 @@ tips:
 // 可以发现无论是 atom 还是 selector 关注点都在 default 比较纯粹的做数据处理
 ```
 
-
-##### 3 base hooks
+### 3 base hooks
 
 ```ts
 1. useRecoilState 具有对 atom 或 selector get 或 set 操作
@@ -125,7 +124,7 @@ isRecoilValue(666) -> false
 
 ```
 
-##### 4. snapshot 快照 大致看一下知道有这个东西就行
+### 4. snapshot 快照 大致看一下知道有这个东西就行
 
 ```ts
 
@@ -156,14 +155,13 @@ const loggg = useRecoilCallback(({snapshot}) => async() => {
  
 ```
 
-***其实到这里项目中如何去使用你的recoil 差不多有个清晰的思路了, 我们去定义 基础atom， 或组合的selector ， 异步的数据你可以通过调用请求然后去set, 或者依靠 atom/selector 异步default 去设置你的数据模型, 并且我们可以发现atom 这个东西的侧重点在default(也就是数据共享) ， 模型层只提供 zet 或 get 还有 reset, 但是selector 拓展性就更强， 有set 可以去设计额外的逻辑 ***
-
+**其实到这里项目中如何去使用你的recoil 差不多有个清晰的思路了, 我们去定义 基础atom， 或组合的selector ， 异步的数据你可以通过调用请求然后去set, 或者依靠 atom/selector 异步default 去设置你的数据模型, 并且我们可以发现atom 这个东西的侧重点在default(也就是数据共享) ， 模型层只提供 zet 或 get 还有 reset, 但是selector 拓展性就更强， 有set 可以去设计额外的逻辑 ***
 
 > 还没完 recoil 还提供了一些更加拓展的api如下:
 
-##### 5. utils
+### 5. utils
 
-*** atomFamily and selectorFamily ***
+> **atomFamily and selectorFamily**
 
 ```ts
 
@@ -227,9 +225,7 @@ const Family2 = () => {
 ps. atomFamily 还是 selectorFamily 相比 atom/selector 而言 可以初始化传参数
 ```
 
-
-*** waitForAll waitForAny waitForNone ***
-
+> **waitForAll waitForAny waitForNone**
 
 ```ts
 
@@ -245,14 +241,14 @@ ps. 异步获取数据时， 只能用 useRecoilValueLoadable 这个hook 去获�
 
 ```
 
+## summary
 
-summary:
 1. atom 适合用于基础数据, selector 适合数据组合, 或拓展额外操作逻辑 在 set里面
 2. 关于hook 或获取同步或异步的, 看自己需求选就行, 异步逻辑可写在基础函数 也可以 利用set 储存数据
 3. 关于 hook自己看情况使用, 同步或异步状态下使用的hook不一样
 4. 是否支持rn？ 直接装是跑不起来的, 是有一些补丁的方式可以去集成
 5. 作为一款官方推出的状态管理确实搭配hook 使用起来还是比较舒服的,
 
+## 参考文章
 
-参考文章:
 1. [recoil官网](https://recoiljs.org/docs/api-reference/core/isRecoilValue)

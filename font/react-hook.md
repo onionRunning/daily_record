@@ -1,8 +1,8 @@
-## react-hook
+# react-hook
 
-### 常用api hook 以及通常用法
+## 常用api hook 以及通常用法
 
-#### useState
+### useState
 
 > 我们用它来更新组件, 自定义hook数据
 
@@ -63,7 +63,7 @@ console(num)
 // 记录一下, 后续源码分析的时候用上.
 ```
 
-#### useEffect
+### useEffect
 
 > class组件中生命周期职责类似
 
@@ -103,7 +103,7 @@ tips:
 
 ---
 
-#### useRef
+### useRef
 
 > 返回一个可变ref对象 function component 唯一引用, 并且自身发生改变是不会触发重新渲染
 
@@ -167,7 +167,7 @@ tips:
 
 ---
 
-#### useCallback or useMemo
+### useCallback or useMemo
 
 关于这2个hook 其实是较少使用的, 用的话是为了做性能优化但是
 
@@ -186,15 +186,14 @@ function useMemo<T>(factory: () => T, deps: DependencyList | undefined): T;
 
 ```
 
-个人理解: 
+个人理解:
 
 1. 频繁触发render,造成了性能瓶颈可以去缓存hook去优化组件
 2. ***但是为了性能优化是有代价的, 不能什么场景下都去用这2个hook, 一般出现性能瓶颈后再去用这2个hook去优化会比较好***
 
-
 ---
 
-#### useContext
+### useContext
 
 - 上下文,跨组件传递数据
 
@@ -247,8 +246,7 @@ tip:
 
 ---
 
-
-#### useLayoutEffect
+### useLayoutEffect
 
 - 功能与 useEffect 类似,参数也一样
 
@@ -281,9 +279,10 @@ tips:
 2. 官方说明: useEffect以避免阻塞视觉更新， 如果是更新dom等操作优先 useLayoutEffect , request数据等操作的话就用useEffect
 
 ```
+
 ---
 
-#### useReducer
+### useReducer
 
 ```js
 function useReducer<R extends ReducerWithoutAction<any>>(
@@ -320,7 +319,7 @@ const App = () => {
 
 1. 5e-hooks 常用的自定义hook
 
-```
+```md
 useMount
 useResetAction
 useDebounce
@@ -340,7 +339,7 @@ useFocus
 
 ### 源码详解
 
-```
+```md
 后续的篇章会介绍深入的源码
 ```
 

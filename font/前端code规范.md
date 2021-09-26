@@ -1,14 +1,14 @@
-## 前端代码规范
+# 前端代码规范记录篇
 
 ---
 
-#### 1. 项目文件目录规范
+## 1. 项目文件目录规范
 
 - 关于目录文件命名: AbbCdd / aa_bb (一般是这2种), 项目中命名就统一用其中的一种, 不要混着用
 
 - 统一项目文件名参考如下
 
-```
+```md
 - assets 静态资源
 - pages  页面组件
 - components 公共组件 : base(基础组件)/bussiness(业务组件)
@@ -22,16 +22,15 @@
 
 > 好的目录结构划分可以让你更加理清楚
 
-- 关于项目命名: aa-bb-cc 
+- 关于项目命名: aa-bb-cc
 
 ---
 
-#### 2. 命名
+## 2. 命名
 
 > ***2.1 js变量声明***
 
-- booean值类型的申明: isXxx / hasXxx / canXxx 
-
+- boolean值类型的申明: isXxx / hasXxx / canXxx
 
 ```js
 // good:
@@ -79,11 +78,10 @@ const xiazai_quan = 'xxxx'
 const downloadCircleContent = {}
 ```
 
-***如果要用到下列变量按照这个格式就行: ID URL Android IOS ***
-
+> **如果要用到下列变量按照这个格式就行: ID URL Android IOS**
 > ***2.2 函数声明***
 
-动作 + 描述词 eg: 改变输入框值: changeValue 
+动作 + 描述词 eg: 改变输入框值: changeValue
 常见动词: change, click, handle , get , set, load ...
 
 > ps. 有些常见名词尽量不要省略，eg: changeIptVal(不是很友好哈)
@@ -105,7 +103,6 @@ const changeIptVal = () => {}
 
 ```
 
-
 > ***2.3 组件声明***
 
 帕斯卡 命名,尽可能带有描述性
@@ -118,7 +115,6 @@ const IdiomListItem = () => { return </> }
 const Item = () => { return </> }
 
 ```
-
 
 > ***2.4 css 命名***
 
@@ -141,16 +137,14 @@ const Item = () => { return </> }
 
 ---
 
-#### 3. eslint 规则
+### 3. eslint 规则
 
 - 具体规则去参照: eslint-config-5e 规则集合, 目前包括: base/react 2大类
 ***[gitlab地址](git@git.dev.moumoux.com:base/eslint-config-5e.git)***
 
-
 > 主要是针对 ts/tsx 语法进行了一些约束,针对这些规则,会不断完善 或者大家觉得需要优化的规则可以提出来进行讨论修改
 
 - rn 项目中如果遇到有些格式上的冲突，可以先从代码层面进行部分调整,然后在考虑规则的问题
-
 
 ---
 
@@ -161,7 +155,7 @@ const Item = () => { return </> }
 
 #### 5. 单元测试
 
-```
+```md
 不需要都写，但是通用的方法需要去写,当然是有目的的去写: 测试哪些有输入输出的
 ```
 
@@ -171,17 +165,17 @@ const Item = () => { return </> }
 
 > 这个是我这几个月记录的一些 merge过程中,被提出的一些问题
 
-1. 如果code 的pr 是解决了哪些issue, 在comment中需要带上: close issue编号, 合并后就自动关闭这个请求
+- 1 如果code 的pr 是解决了哪些issue, 在comment中需要带上: close issue编号, 合并后就自动关闭这个请求
 
-2. 项目中特殊的操作可以记录留痕: Readme.md, FIX. TODO 记录一下
+- 2 项目中特殊的操作可以记录留痕: Readme.md, FIX. TODO 记录一下
 
-```
+```md
 - 对于README.md 首先我们要重视, 比如你接入了第三方的东西 就可以记录留痕
 - 编码过程如果遇到比较难处理的问题,然后找到方式去解决都可以做个记录
 - 非常规的代码为什么要这么写,搞点注释加上去可以,有助于大家理解
 ```
 
-3. 对于react中组件中的合成方法:
+- 3 对于react中组件中的合成方法:
 
 ```js
 // A
@@ -197,7 +191,7 @@ return 是写dom的地方,如果写过多的js逻辑,感觉有些干扰
 
 ```
 
-4. 关于useEffect 如果你进行封装的话,那么依赖的参数名用deps
+- 4 关于useEffect 如果你进行封装的话,那么依赖的参数名用deps
 
 ```js
 
@@ -221,7 +215,7 @@ const useXX<T> = (fn: () => void, params= T[] ) => {
 
 ```
 
-5. 关于hook: useState 比较简单可以省略掉声明
+- 5 关于hook: useState 比较简单可以省略掉声明
 
 ```js
 // bad
@@ -232,13 +226,13 @@ const [value, setValue] = useState('')
 
 ```
 
-6. 关于命名:
+- 6 关于命名:
 
-```
+```md
 需要严格按照上面的介绍情况处理
 ```
 
-7. styleComponents
+- 7 styleComponents
 
 ```js
 - 申明首字母要是s
@@ -246,9 +240,9 @@ const [value, setValue] = useState('')
 
 ---
 
-#### 可以非必要强制遵守
+### 可以非必要强制遵守
 
-##### 1. 使用可搜索的名称
+#### 1. 使用可搜索的名称
 
 我们要阅读的代码比要写的代码多得多， 所以我们写出的代码的可读性和可搜索性是很重要的。 使用没有
 意义的变量名将会导致我们的程序难于理解， 将会伤害我们的读者， 所以请使用可搜索的变量名。
@@ -290,14 +284,13 @@ const [, city, zipCode] = address.match(cityZipCodeRegex) || []
 saveCityZipCode(city, zipCode)
 ```
 
-##### 3. 函数应当只做一件事情
+#### 3. 函数应当只做一件事情
 
 这是软件工程中最重要的一条规则， 当函数需要做更多的事情时， 它们将会更难进行编写、 测试和推理。
 当你能将一个函数隔离到只有一个动作， 他们将能够被容易的进行重构并且你的代码将会更容易阅读。 如
 果你严格遵守本指南中的这一条， 你将会领先于许多开发者。
 
-
-##### 4. 移除冗余代码
+#### 4. 移除冗余代码
 
 竭尽你的全力去避免冗余代码。 冗余代码是不好的， 因为它意味着当你需要修改一些逻辑时会有多个地方
 需要修改。
@@ -310,8 +303,8 @@ saveCityZipCode(city, zipCode)
 余代码更差， 所以要谨慎行事。 既然已经这么说了， 如果你能够做出一个好的抽象， 才去做。 不要重复
 你自己， 否则你会发现当你要修改一个东西时时刻需要修改多个地方。
 
-
 ---
 
 参考文章:
+
 1. [腾讯团队编码规范](http://alloyteam.github.io/CodeGuide/)

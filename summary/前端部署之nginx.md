@@ -1,6 +1,6 @@
 # 前端开发者在运维部署方面需要了解的nginx
 
-### 背景: 
+## 背景
 
 某次部署时然后需要用nginx 去部署, 然后就要去翻翻文档 然后一直忘记 一直看文档...
 
@@ -12,18 +12,17 @@
 - 知道去用
 - api介绍
 
-### 基本概念
+## 基本概念
 
 笔记强化记忆!
-#### 什么是nginx
+
+### 什么是nginx
 
 官方介绍: 高性能的 web服务器 / 反向代理服务器, 同时也提供了IMAP/POP3/SMTP服务!
 
-- web服务器: 
- 
+- web服务器:
+
 #### nginx 可以用来做什么
-
-
 
 #### 原理
 
@@ -35,7 +34,7 @@
 
 当我们安装好了之后 我们执行: nginx -t , 看到以下log 说明已经装好了, 当然路径图有可能不一样 看你自己安装的路径!
 
-```
+```md
 nginx: the configuration file /usr/local/etc/nginx/nginx.conf syntax is ok
 nginx: configuration file /usr/local/etc/nginx/nginx.conf test is successful
 
@@ -43,17 +42,9 @@ nginx: configuration file /usr/local/etc/nginx/nginx.conf test is successful
 
 ```
 
-
-
-
-
 ### 实际项目集成
 
-
 ### 总结
-
-
-
 
 参考链接:
 
