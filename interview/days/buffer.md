@@ -148,6 +148,17 @@ const view = new DataView(buffer)
     }
 
 
+    // Uint8Array ----> string
+    const a = '我丢我丢'
+    const uint8 = str => {
+        return new TextEncoder("utf-8").encode(str);
+    }
+    const str8 = buf => {
+        return new TextDecoder().decode(buf)
+    }
+    const c = uint8(a)
+    const d = str8(c)
+
 ```
 
 ## 参考文章
